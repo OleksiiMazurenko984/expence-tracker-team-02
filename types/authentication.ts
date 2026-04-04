@@ -1,4 +1,5 @@
-//  типы для аутентификации: запросы и ответы регистрации  а также используемые поля пользователя (валюта, категории, totals)
+// Типы для аутентификации: запросы/ответы регистрации и логина.
+// Также описываем поля пользователя, которые возвращает бэкенд (валюта, категории, totals).
 import type { CategoriesResponse } from './category';
 import type { Currency } from './sharedTypes';
 import type { TransactionsTotal } from './user';
