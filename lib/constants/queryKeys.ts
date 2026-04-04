@@ -1,7 +1,5 @@
-//Папка `lib/constants` — хранилище общих констант проекта.
-//Сейчас здесь `queryKeys.ts` с едиными ключами для React Query (кеширование и инвалидации).
-
-
+// Общие константы для проекта.
+// Здесь ключи для React Query: кеширование и инвалидация запросов.
 import type { TransactionType } from '@/types/sharedTypes';
 
 export const queryKeys = {

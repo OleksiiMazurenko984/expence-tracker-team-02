@@ -17,12 +17,21 @@ type ParsedCookie = {
   sameSite?: 'lax' | 'strict' | 'none';
 };
 
-// Rough parser for Set-Cookie that keeps main attributes we need.
-function parseSetCookieHeader(header: string | null): ParsedCookie[] {
-  if (!header) return [];
+function getSetCookieValues(headers: Headers): string[] {
+  const arrayApi = (headers as unknown as { getSetCookie?: () => string[] })
+    .getSetCookie?.();
+  if (Array.isArray(arrayApi)) return arrayApi;
 
-  // split multiple cookies; attributes never start with token=value pattern
-  const cookieStrings = header.split(/,(?=[^;]+=[^;]+)/);
+  const list: string[] = [];
+  headers.forEach((value, key) => {
+    if (key.toLowerCase() === 'set-cookie') list.push(value);
+  });
+  return list;
+}
+
+function parseSetCookieHeader(headers: Headers): ParsedCookie[] {
+  const cookieStrings = getSetCookieValues(headers);
+  if (!cookieStrings.length) return [];
 
   return cookieStrings
     .map((cookieStr) => {
@@ -95,7 +104,7 @@ export async function middleware(request: NextRequest) {
 
   const response = NextResponse.next();
 
-  // Refresh session if we only have a refresh token.
+
   if (!accessToken && refreshToken) {
     try {
       const sessionResponse = await fetch(`${API_URL}/auth/session`, {
@@ -104,9 +113,7 @@ export async function middleware(request: NextRequest) {
         cache: 'no-store',
       });
 
-      const parsedCookies = parseSetCookieHeader(
-        sessionResponse.headers.get('set-cookie')
-      );
+      const parsedCookies = parseSetCookieHeader(sessionResponse.headers);
 
       if (parsedCookies.length) {
         for (const cookie of parsedCookies) {
