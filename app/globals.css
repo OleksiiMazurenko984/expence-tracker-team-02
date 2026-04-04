@@ -1,16 +1,78 @@
+:root {
+  --bg-color: #0c0d0d;
+  --btn-grey: #29292b;
+  --green-neon: #0ef387;
+  --green-hover: #0ebb69;
+
+  --decorationr-grey: rgba(17, 16, 28, 0.5);
+  --decoration-green: rgba(2, 177, 90, 0.15);
+  --decoration-green-dark: #02b15a;
+  --decoration-black: #11101c;
+
+  --white: #fafafa;
+  --white-dim-05: rgba(250, 250, 250, 0.5);
+  --white-dim-04: rgba(250, 250, 250, 0.4);
+  --white-dim-02: rgba(250, 250, 250, 0.2);
+  --white-dim-01: rgba(250, 250, 250, 0.1);
+
+  --component-bg-color: #171719;
+  --overlay-color: rgba(12, 13, 13, 0.5);
+  --error-red: #e74a3b;
+
+  --font-main: var(--font-inter), sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: var(--font-roboto), sans-serif;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: var(--white);
+  margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  margin: 0;
-  background-color: #f8f9fa;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1440px;
+    padding: 0 64px;
+  }
 }
 
 h1,
 h2,
 h3,
-p,
+h4,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
 ul {
   margin: 0;
   padding: 0;
@@ -27,4 +89,44 @@ button {
   font-family: inherit;
   border: none;
   background: none;
+  padding: 0;
+}
+
+input,
+select,
+textarea {
+  font-family: inherit;
+  outline: none;
+  border: 1px solid var(--white-dim-02);
+  background-color: transparent;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
