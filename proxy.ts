@@ -88,7 +88,7 @@ function parseSetCookieHeader(headers: Headers): ParsedCookie[] {
     .filter((c): c is ParsedCookie => Boolean(c));
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const accessToken = request.cookies.get('accessToken')?.value;
