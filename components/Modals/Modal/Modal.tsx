@@ -1,34 +1,57 @@
 "use client";
 
-import { useEffect } from "react";
-import css from "./Modal.module.css";
+import React, { useEffect, useCallback } from "react";
+import styles from "./Modal.module.css";
+import { useModal } from "@/lib/hooks/use-modal-store";
+import { createPortal } from "react-dom";
 
-interface ModalProps {
+interface BaseModalProps {
   children: React.ReactNode;
-  onClose: () => void;
 }
 
-const Modal = ({ children, onClose }: ModalProps) => {
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+const Modal = ({ children }: BaseModalProps) => {
+  const { isOpen, onClose } = useModal();
 
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose],
+  );
+
+  useEffect(() => {
+    if (isOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
 
     return () => {
-      document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
-  }, [onClose]);
+  }, [isOpen, handleKeyDown]);
 
-  return (
-    <div className={css.backdrop} onClick={onClose}>
-      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
-        {children}
+  if (!isOpen) return null;
+
+  return createPortal(
+    <div className={styles.backdrop} onClick={onClose}>
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.header}>
+          <button
+            onClick={onClose}
+            className={styles.closeButton}
+            aria-label="Close"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className={styles.content}>{children}</div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
