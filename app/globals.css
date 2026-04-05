@@ -16,7 +16,7 @@
   --white-dim-01: rgba(250, 250, 250, 0.1);
 
   --component-bg-color: #171719;
-  --overlay-color: rgba(12, 13, 13, 0.5);
+  --overlay-color: rgba(12, 13, 13, 0.6);
   --error-red: #e74a3b;
 
   --font-main: var(--font-inter), sans-serif;
