@@ -1,0 +1,59 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 40px;
+  padding: 14px 44px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  outline: none;
+}
+
+.btn svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.green {
+  background-color: var(--green-neon);
+  color: var(--bg-color);
+}
+.green:hover {
+  background-color: var(--green-hover);
+}
+
+.outline {
+  background-color: transparent;
+  border-color: var(--white-dim-04);
+  color: var(--white);
+}
+.outline:hover {
+  border-color: var(--green-neon);
+}
+
+.gray {
+  background-color: #242424;
+  color: var(--white);
+}
+.gray:hover {
+  color: var(--white-dim-05);
+}
+
+.black {
+  background-color: var(--bg-color);
+  color: var(--white);
+}
+
+.desktop {
+  font-size: 16px;
+}
+
+.mobile {
+  font-size: 14px;
+}
