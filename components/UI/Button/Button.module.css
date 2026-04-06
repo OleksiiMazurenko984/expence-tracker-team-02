@@ -2,11 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   border-radius: 40px;
-  padding: 14px 44px;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
   white-space: nowrap;
   outline: none;
 }
@@ -23,6 +20,7 @@
 .green {
   background-color: var(--green-neon);
   color: var(--bg-color);
+  transition: background-color 0.2s ease;
 }
 .green:hover {
   background-color: var(--green-hover);
@@ -32,6 +30,7 @@
   background-color: transparent;
   border-color: var(--white-dim-04);
   color: var(--white);
+  transition: border-color 0.2s ease;
 }
 .outline:hover {
   border-color: var(--green-neon);
@@ -40,6 +39,7 @@
 .gray {
   background-color: #242424;
   color: var(--white);
+  transition: color 0.2s ease;
 }
 .gray:hover {
   color: var(--white-dim-05);
