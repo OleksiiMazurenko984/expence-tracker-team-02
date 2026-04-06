@@ -3,6 +3,8 @@
 import { useCurrentUser } from '@/lib/hooks/useCurrentUser';
 import styles from './TransactionsTotalAmount.module.css';
 import { IncomeIndicatorIcon, ExpenseIndicatorIcon } from '@/components/UI/Icons/Icons';
+import Loader from '@/components/UI/Loader/Loader';
+import Skeleton from '@/components/UI/Skeleton/Skeleton';
 
 export default function TransactionsTotalAmount() {
   const { data: user, isLoading } = useCurrentUser();
@@ -17,7 +19,28 @@ export default function TransactionsTotalAmount() {
   };
 
   if (isLoading) {
-    return <div className={styles.loader}>Loading totals...</div>;
+    return (
+      <div className={styles.skeletonWrap}>
+        <div className={styles.block}>
+          <div className={styles.iconWrapper}>
+            <Skeleton width={32} height={32} radius="50%" />
+          </div>
+          <div className={styles.info}>
+            <Skeleton width={120} height={14} />
+            <Skeleton width={90} height={18} />
+          </div>
+        </div>
+        <div className={styles.block}>
+          <div className={styles.iconWrapper}>
+            <Skeleton width={32} height={32} radius="50%" />
+          </div>
+          <div className={styles.info}>
+            <Skeleton width={120} height={14} />
+            <Skeleton width={90} height={18} />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

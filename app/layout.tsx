@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { ModalProvider } from "@/providers/modal-provider";
+import { Suspense } from "react";
+import Loader from "@/components/UI/Loader/Loader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${inter.variable}`}>
-        <Providers>
-          {children}
-          <ModalProvider />
-        </Providers>
+        <Suspense fallback={<Loader />}>
+          <Providers>
+            {children}
+            <ModalProvider />
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );
