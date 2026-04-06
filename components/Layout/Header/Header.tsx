@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Logo from "../Logo/Logo";
-import css from "./Header.module.css";
+import Logo from '../Logo/Logo';
+import css from './Header.module.css';
 
 export default function Header() {
   const isAuthenticated = true; // Тимчасово
-  const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ""}`;
+  const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ''}`;
 
   return (
     <header className={headerClasses}>

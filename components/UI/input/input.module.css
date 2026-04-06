@@ -1,0 +1,61 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--white-dim-02);
+  border-radius: 12px;
+  padding: 12px 14px 12px 18px;
+  background: transparent;
+  transition: border-color 0.2s ease;
+  width: 420px;
+  height: 48px;
+}
+
+.field:is(:hover, :focus) {
+  border-color: var(--green-neon);
+}
+
+.error {
+  border-color: var(--error-red);
+}
+
+.input {
+  flex: 1;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: var(--white-dim-04);
+  border: none;
+}
+
+.iconLeft,
+.iconRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: none;
+  stroke: var(--white);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.errorText {
+  color: var(--error-red);
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 4px 0 0;
+}

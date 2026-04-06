@@ -1,0 +1,161 @@
+.container {
+  background: var(--component-bg-color);
+  padding: 40px;
+  border-radius: 30px;
+  width: 566px;
+  height: 600px;
+  box-sizing: border-box;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.typeSelector {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 8px;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--white);
+}
+
+.radioLabel input {
+  display: none;
+}
+
+.radioCustom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.radioCustom::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(250, 250, 250, 0.3);
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.radioLabel input:checked + .radioCustom::before {
+  background: var(--green-neon);
+  border-color: var(--green-neon);
+  box-shadow: inset 0 0 0 3px var(--component-bg-color);
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.fieldGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.input, .textarea {
+  background: var(--bg-color);
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 13px;
+  padding: 12px 16px;
+  color: var(--white);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  right: 14px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.input:focus, .textarea:focus {
+  border-color: var(--green-neon);
+  box-shadow: 0 0 0 2px rgba(0, 210, 127, 0.2);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.submitBtn {
+  width: 100%;
+  border-radius: var(--radius-btn);
+  padding: 16px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.error {
+  font-size: 12px;
+  color: #ff4545;
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+}
+
+@media (min-width: 768px) and (max-width: 1439px) {
+  .container {
+    width: 704px;
+    height: 600px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 335px;
+    height: 533px;
+    padding: 24px 16px;
+    margin: 0 auto;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .summary {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px;
+  }
+}
