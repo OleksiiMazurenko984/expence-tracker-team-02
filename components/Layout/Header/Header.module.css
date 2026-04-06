@@ -1,0 +1,62 @@
+.header {
+  width: 100%;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid var(--white-dim-01);
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.authNav {
+  display: none;
+}
+
+.burgerBtn {
+  display: flex;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 13px;
+}
+
+.burgerIcon {
+  stroke: var(--white);
+  fill: none;
+  width: 36px;
+  height: 36px;
+  transition: stroke 0.2s ease;
+}
+
+.burgerBtn:focus .burgerIcon,
+.burgerBtn:active .burgerIcon {
+  stroke: var(--green-neon);
+}
+
+.header.isPublic {
+  border-bottom: none;
+}
+
+.header.isPublic .headerContent {
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .burgerIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .burgerBtn:hover .burgerIcon {
+    stroke: var(--green-neon);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .authNav {
+    display: block;
+  }
+}
