@@ -1,12 +1,11 @@
-﻿// app/(auth routes)/login/page.tsx
-'use client';
+﻿'use client';
 
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/UI/Button/Button';
 import { loginUser } from '@/lib/api/authApi';
 import type { LoginRequest } from '@/types/authentication';
-import styles from './LoginPage.module.css'; // если у тебя уже есть модуль — оставь, иначе создай пустой или удали импорт
+import styles from './LoginPage.module.css';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -32,7 +31,6 @@ export default function LoginPage() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // очищаем ошибку при вводе
     if (errors[name as keyof LoginRequest]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -45,10 +43,8 @@ export default function LoginPage() {
     startTransition(async () => {
       try {
         await loginUser(formData);
-        // middleware сам сделает редирект, но для мгновенности:
         router.replace('/transactions/expenses');
       } catch {
-        // toast уже показан в сервисе
       }
     });
   };

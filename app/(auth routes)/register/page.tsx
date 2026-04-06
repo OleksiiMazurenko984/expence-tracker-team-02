@@ -1,12 +1,11 @@
-﻿// app/(auth routes)/register/page.tsx
-'use client';
+﻿'use client';
 
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/UI/Button/Button';
 import { registerUser } from '@/lib/api/authApi';
 import type { RegisterRequest } from '@/types/authentication';
-import styles from './RegisterPage.module.css'; // если у тебя уже есть модуль — оставь, иначе создай пустой или удали импорт
+import styles from './RegisterPage.module.css';
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -48,7 +47,6 @@ export default function RegisterPage() {
         await registerUser(formData);
         router.replace('/transactions/expenses');
       } catch {
-        // toast уже показан в сервисе
       }
     });
   };
