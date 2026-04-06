@@ -7,10 +7,21 @@ import { createPortal } from "react-dom";
 
 interface BaseModalProps {
   children: React.ReactNode;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-const Modal = ({ children }: BaseModalProps) => {
-  const { isOpen, onClose } = useModal();
+const Modal = ({
+  children,
+  isOpen: explicitIsOpen,
+  onClose: explicitOnClose,
+}: BaseModalProps) => {
+  const storeModal = useModal();
+
+  const isOpen =
+    explicitIsOpen !== undefined ? explicitIsOpen : storeModal.isOpen;
+  const onClose =
+    explicitOnClose !== undefined ? explicitOnClose : storeModal.onClose;
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -37,7 +48,7 @@ const Modal = ({ children }: BaseModalProps) => {
 
   return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.header}>
           <button
             onClick={onClose}
