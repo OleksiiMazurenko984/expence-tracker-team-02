@@ -1,4 +1,3 @@
-// Auth-���������: �����������, �����, ������, ���������� ������.
 import { api } from './api';
 import type {
   LoginRequest,
