@@ -1,24 +1,19 @@
-'use client';
-
-import { use, useEffect } from 'react';
-import { notFound, useRouter } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import TransactionsTotalAmount from '@/components/Transactions/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from '@/components/Transactions/TransactionsChart/TransactionsChart';
 import TransactionForm from '@/components/Transactions/TransactionForm/TransactionForm';
 import styles from './MainTransactionsPage.module.css';
 
-export default function TransactionsPage({
+export default async function TransactionsPage({
   params,
 }: {
   params: Promise<{ transactionsType: string }>;
 }) {
-  const { transactionsType } = use(params);
+  const { transactionsType } = await params;
 
-  useEffect(() => {
-    if (transactionsType !== 'incomes' && transactionsType !== 'expenses') {
-      notFound();
-    }
-  }, [transactionsType]);
+  if (transactionsType !== 'incomes' && transactionsType !== 'expenses') {
+    notFound();
+  }
 
   const title = transactionsType === 'incomes' ? 'Incomes' : 'Expenses';
   const description =
