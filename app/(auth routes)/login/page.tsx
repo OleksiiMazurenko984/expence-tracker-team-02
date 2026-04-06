@@ -2,10 +2,9 @@
 
 import { useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
-import Button from '@/components/UI/Button/Button';
 import { loginUser } from '@/lib/api/authApi';
 import type { LoginRequest } from '@/types/authentication';
-import styles from './LoginPage.module.css';
+import AuthForm from '@/components/Auth/AuthForm';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -22,7 +21,7 @@ export default function LoginPage() {
     if (!formData.email) newErrors.email = 'Email обязателен';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Неверный формат email';
     if (!formData.password) newErrors.password = 'Пароль обязателен';
-    else if (formData.password.length < 6) newErrors.password = 'Пароль минимум 6 символов';
+    else if (formData.password.length < 8) newErrors.password = 'Пароль минимум 8 символов';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -44,52 +43,18 @@ export default function LoginPage() {
       try {
         await loginUser(formData);
         router.replace('/transactions/expenses');
-      } catch {
-      }
+      } catch {}
     });
   };
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h1 className={styles.title}>Вход</h1>
-
-        <div className={styles.field}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`${styles.input} ${errors.email ? styles.error : ''}`}
-            disabled={isPending}
-          />
-          {errors.email && <span className={styles.errorText}>{errors.email}</span>}
-        </div>
-
-        <div className={styles.field}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Пароль"
-            value={formData.password}
-            onChange={handleChange}
-            className={`${styles.input} ${errors.password ? styles.error : ''}`}
-            disabled={isPending}
-          />
-          {errors.password && <span className={styles.errorText}>{errors.password}</span>}
-        </div>
-
-        <Button
-          type="submit"
-          variant="green"
-          size="desktop"
-          disabled={isPending}
-          className={styles.submitBtn}
-        >
-          {isPending ? 'Вход...' : 'Войти'}
-        </Button>
-      </form>
-    </div>
+    <AuthForm
+      mode="login"
+      formData={formData}
+      errors={errors}
+      isPending={isPending}
+      onChange={handleChange}
+      onSubmit={handleSubmit}
+    />
   );
 }
