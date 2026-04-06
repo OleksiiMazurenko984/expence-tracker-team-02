@@ -3,8 +3,7 @@ import { Inter } from "next/font/google";
 import "modern-normalize/modern-normalize.css";
 import "./globals.css";
 import { ModalProvider } from "@/providers/modal-provider";
-import { Suspense } from "react";
-import Loader from "@/components/UI/Loader/Loader";
+import Providers from "@/components/Layout/Providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,8 +18,6 @@ export const metadata: Metadata = {
     "Track your income and expenses easily with our intuitive finance management tool.",
 };
 
-import Providers from "@/components/Layout/Providers";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,12 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${inter.variable}`}>
-        <Suspense fallback={<Loader />}>
-          <Providers>
-            {children}
-            <ModalProvider />
-          </Providers>
-        </Suspense>
+        <Providers>
+          <ModalProvider />
+          {children}
+        </Providers>
       </body>
     </html>
   );
