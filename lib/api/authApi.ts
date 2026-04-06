@@ -44,3 +44,4 @@ export const logout = async (): Promise<void> => {
 export const refreshSession = async (): Promise<void> => {
   await api.get('/auth/session');
 };
+
