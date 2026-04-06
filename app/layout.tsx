@@ -6,16 +6,16 @@ import { ModalProvider } from "@/providers/modal-provider";
 import Providers from "@/components/Layout/Providers";
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-inter",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-inter',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: "ExpenseTracker",
+  title: 'ExpenseTracker',
   description:
-    "Track your income and expenses easily with our intuitive finance management tool.",
+    'Track your income and expenses easily with our intuitive finance management tool.',
 };
 
 export default function RootLayout({
