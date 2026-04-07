@@ -3,16 +3,16 @@ import { proxyRequest } from '@/lib/api/serverProxy';
 import type { UpdateTransactionResponse } from '@/types/transaction';
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     slug: string;
     id: string;
-  };
+  }>;
 };
 
 export async function PATCH(req: NextRequest, { params }: RouteContext) {
   const cookie = req.headers.get('cookie') || '';
   const body = await req.json();
-  const { slug, id } = params;
+  const { slug, id } = await params;
 
   const { status, data } = await proxyRequest<UpdateTransactionResponse>(
     `/transactions/${slug}/${id}`,
@@ -25,4 +25,3 @@ export async function PATCH(req: NextRequest, { params }: RouteContext) {
 
   return NextResponse.json(data, { status });
 }
-

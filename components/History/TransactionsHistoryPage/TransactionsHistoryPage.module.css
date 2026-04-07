@@ -1,0 +1,70 @@
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #fafafa;
+}
+
+.title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+}
+
+.description {
+  margin: 20px 0 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: rgba(250, 250, 250, 0.4);
+  max-width: 680px;
+}
+
+.historySection {
+  width: 100%;
+  max-width: 335px;
+  height: 516px;
+  margin: 0 auto;
+  border-radius: 30px;
+  background: #171719;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.listSection {
+  min-height: 0;
+}
+
+.headerSection {
+  margin-bottom: 36px;
+}
+
+.totalSection {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .pageContainer {
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 38px;
+    line-height: 1.15;
+  }
+
+  .description {
+    margin-top: 14px;
+  }
+
+  .listSection {
+    overflow: hidden;
+    display: flex;
+  }
+}

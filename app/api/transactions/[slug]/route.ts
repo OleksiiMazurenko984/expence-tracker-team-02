@@ -1,16 +1,19 @@
 ﻿import { NextRequest, NextResponse } from 'next/server';
 import { proxyRequest } from '@/lib/api/serverProxy';
-import type { TransactionItem, DeleteTransactionResponse } from '@/types/transaction';
+import type {
+  TransactionItem,
+  DeleteTransactionResponse,
+} from '@/types/transaction';
 
 type RouteContext = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export async function GET(req: NextRequest, { params }: RouteContext) {
   const cookie = req.headers.get('cookie') || '';
-  const { slug } = params;
+  const { slug } = await params;
 
   const searchParams = req.nextUrl.searchParams.toString();
   const endpoint = searchParams
@@ -30,7 +33,7 @@ export async function GET(req: NextRequest, { params }: RouteContext) {
 
 export async function DELETE(req: NextRequest, { params }: RouteContext) {
   const cookie = req.headers.get('cookie') || '';
-  const { slug } = params;
+  const { slug } = await params;
 
   const { status, data } = await proxyRequest<DeleteTransactionResponse>(
     `/transactions/${slug}`,
@@ -42,4 +45,3 @@ export async function DELETE(req: NextRequest, { params }: RouteContext) {
 
   return NextResponse.json(data, { status });
 }
-

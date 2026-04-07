@@ -1,0 +1,71 @@
+.tableWrap {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table {
+  min-width: 760px;
+}
+
+.headRow,
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.headRow {
+  color: rgba(250, 250, 250, 0.5);
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  min-height: 56px;
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.iconButton {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  background: transparent;
+  color: #fafafa;
+  cursor: pointer;
+}
+
+.income {
+  color: #0ef387;
+}
+
+.expense {
+  color: #ff868d;
+}
+
+.state {
+  color: rgba(250, 250, 250, 0.6);
+}
+
+@media (min-width: 768px) {
+  .tableWrap {
+    height: 100%;
+  }
+}
