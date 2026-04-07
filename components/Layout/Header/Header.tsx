@@ -3,10 +3,12 @@
 import Logo from '../Logo/Logo';
 import TransactionsHistoryNav from '../TransactionsHistoryNav/TransactionsHistoryNav';
 import UserBarBtn from '../UserBarBtn/UserBarBtn';
+import { useUiStore } from '@/lib/store/uiStore';
 import css from './Header.module.css';
 
 export default function Header() {
   const isAuthenticated = true; // Тимчасово
+  const { toggleBurgerMenu } = useUiStore();
   const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ''}`;
 
   return (
@@ -32,6 +34,7 @@ export default function Header() {
                 className={css.burgerBtn}
                 type="button"
                 aria-label="Open menu"
+                onClick={toggleBurgerMenu}
               >
                 <svg className={css.burgerIcon}>
                   <use href="/icons.svg#icon-burger-menu" />
