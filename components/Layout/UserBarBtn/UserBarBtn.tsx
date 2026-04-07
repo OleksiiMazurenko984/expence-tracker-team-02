@@ -26,14 +26,12 @@ const UserBarBtn = () => {
       <span className={css.userName}>{userName}</span>
 
       <div className={css.chevronWrapper}>
-        <svg className={css.chevronIcon} width="20" height="20">
-          <use
-            href={
-              isOpen
-                ? '/icons.svg#icon-chevron-down'
-                : '/icons.svg#icon-chevron-up'
-            }
-          />
+        <svg
+          className={`${css.chevronIcon} ${isOpen ? css.isOpen : ''}`}
+          width="20"
+          height="20"
+        >
+          <use href="/icons.svg#icon-chevron-down" />
         </svg>
       </div>
     </button>

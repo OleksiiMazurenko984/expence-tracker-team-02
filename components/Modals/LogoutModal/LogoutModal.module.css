@@ -1,48 +1,39 @@
-/* Container for the button group */
-.buttonGroup {
+.logoutContent {
   display: flex;
-  gap: 12px;
-  width: 100%;
-  margin-top: 24px;
-}
+  flex-direction: column;
 
-/* Base button styles */
-.btn {
-  flex: 1;
-  padding: 12px 24px;
-  border-radius: 40px; /* Pill shape as seen in screenshot */
-  border: none;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    opacity 0.2s ease,
-    transform 0.1s ease;
-  display: flex;
   align-items: center;
   justify-content: center;
+
+  padding: 60px 0;
+  gap: 39px;
+}
+@media only screen and (min-width: 768px) {
+  .logoutContent {
+    padding: 40px 0;
+  }
+}
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+
+  margin: 0 auto;
+}
+.logoutText {
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+.btnLogout {
+  padding: 14px 44px;
+}
+.btnCancel {
+  padding: 14px 44px;
 }
 
-.btn:active {
-  transform: scale(0.98);
-}
-
-/* Specific style for the green Log out button */
-.logout {
-  background-color: #00e676; /* Vibrant neon green */
-  color: #000000;
-}
-
-.logout:hover {
-  opacity: 0.9;
-}
-
-/* Specific style for the gray Cancel button */
-.cancel {
-  background-color: #29292c; /* Dark gray background */
-  color: #ffffff;
-}
-
-.cancel:hover {
-  background-color: #323235;
+@media only screen and (min-width: 768px) {
+  .btnLogout,
+  .btnCancel,
+  .logoutText {
+    font-size: 16px;
+  }
 }

@@ -6,7 +6,7 @@ import UserBarBtn from '../UserBarBtn/UserBarBtn';
 import css from './Header.module.css';
 
 export default function Header() {
-  const isAuthenticated = false; // Тимчасово
+  const isAuthenticated = true; // Тимчасово
   const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ''}`;
 
   return (

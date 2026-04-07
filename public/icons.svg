@@ -34,10 +34,6 @@
             <path stroke-width="3.2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round"
                 d="M8 12l8 8 8-8"></path>
         </symbol>
-        <symbol id="icon-chevron-up" viewBox="0 0 32 32">
-            <path stroke-width="3.2" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round"
-                d="M8 20l8-8 8 8"></path>
-        </symbol>
         <symbol id="icon-clock" viewBox="0 0 32 32">
             <path stroke-width="2.4" stroke-miterlimit="4" stroke-linecap="round" stroke-linejoin="round"
                 d="M16 29.333c7.364 0 13.333-5.969 13.333-13.333s-5.97-13.333-13.333-13.333c-7.364 0-13.333 5.97-13.333 13.333s5.97 13.333 13.333 13.333z">

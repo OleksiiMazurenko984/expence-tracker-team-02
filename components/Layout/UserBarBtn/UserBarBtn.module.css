@@ -19,6 +19,16 @@
   overflow: hidden;
 }
 
+.chevronIcon {
+  stroke: var(--green-neon);
+  fill: none;
+  transition: transform 0.2s ease;
+}
+
+.isOpen {
+  transform: rotate(180deg);
+}
+
 .userIcon {
   stroke: none;
   fill: var(--green-neon);
