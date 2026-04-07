@@ -4,6 +4,7 @@ import 'modern-normalize/modern-normalize.css';
 import './globals.css';
 import Header from '@/components/Layout/Header/Header';
 import { ModalProvider } from '@/providers/modal-provider';
+import Providers from '@/components/Layout/Providers';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,8 +19,6 @@ export const metadata: Metadata = {
     'Track your income and expenses easily with our intuitive finance management tool.',
 };
 
-import Providers from '@/components/Layout/Providers';
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -30,8 +29,8 @@ export default function RootLayout({
       <body className={`${inter.className} ${inter.variable}`}>
         <Providers>
           <Header />
-          {children}
           <ModalProvider />
+          {children}
         </Providers>
       </body>
     </html>

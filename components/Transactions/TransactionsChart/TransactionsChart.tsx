@@ -3,6 +3,8 @@
 import { useMemo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { useStats } from '@/lib/hooks/useStatsFixed';
+import Loader from '@/components/UI/Loader/Loader';
+import Skeleton from '@/components/UI/Skeleton/Skeleton';
 
 import styles from './TransactionsChart.module.css';
 
@@ -32,7 +34,19 @@ export default function TransactionsChart() {
   const outerRadius = 120;
 
   if (isLoading) {
-    return <div className={styles.loader}>Loading chart...</div>;
+    return (
+      <div className={styles.loader}>
+        <div className={styles.skeletonChart}>
+          <Skeleton width="100%" height={200} radius={16} />
+          <div className={styles.skeletonList}>
+            <Skeleton width="60%" height={12} />
+            <Skeleton width="70%" height={12} />
+            <Skeleton width="50%" height={12} />
+            <Skeleton width="80%" height={12} />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // To make it look like the figma gauge half-pie chart:
