@@ -6,7 +6,7 @@ import UserBarBtn from '../UserBarBtn/UserBarBtn';
 import css from './Header.module.css';
 
 export default function Header() {
-  const isAuthenticated = true; // Тимчасово
+  const isAuthenticated = false; // Тимчасово
   const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ''}`;
 
   return (
@@ -17,7 +17,10 @@ export default function Header() {
 
           {isAuthenticated && (
             <>
-              <nav className={css.navigation}>
+              <nav
+                className={css.navigation}
+                aria-label="Main transaction navigation"
+              >
                 <TransactionsHistoryNav />
               </nav>
 

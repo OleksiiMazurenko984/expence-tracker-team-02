@@ -54,13 +54,18 @@
 }
 
 @media screen and (min-width: 768px) {
-  .burgerIcon {
-    width: 44px;
-    height: 44px;
+  .burgerBtn {
+    padding-top: 24px;
+    padding-bottom: 23px;
   }
 
   .burgerBtn:hover .burgerIcon {
     stroke: var(--green-neon);
+  }
+
+  .burgerIcon {
+    width: 44px;
+    height: 44px;
   }
 
   .header.isPublic .headerContent {
@@ -76,11 +81,8 @@
   .userBarBtn {
     display: block;
   }
+
   .burgerBtn {
     display: none;
-  }
-
-  .header.isPublic .headerContent {
-    padding-top: 32px;
   }
 }
