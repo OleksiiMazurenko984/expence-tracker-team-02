@@ -6,7 +6,6 @@ import Loader from '@/components/UI/Loader/Loader';
 export default function PrivateLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
       <Suspense fallback={<Loader />}>
         <main className="container" style={{ paddingTop: '40px' }}>
           {children}
