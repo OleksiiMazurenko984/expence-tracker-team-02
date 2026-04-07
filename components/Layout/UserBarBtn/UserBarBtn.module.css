@@ -1,0 +1,40 @@
+.userBtn {
+  display: flex;
+  align-items: center;
+  background-color: var(--component-bg-color);
+  gap: 8px;
+  border-radius: 30px;
+  padding: 6px 16px;
+}
+
+.avatarWrapper {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--overlay-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.userIcon {
+  stroke: none;
+  fill: var(--green-neon);
+}
+
+.userName {
+  color: var(--white-dim-04);
+}
+
+.chevronWrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.chevronIcon {
+  stroke: var(--green-neon);
+  fill: none;
+}

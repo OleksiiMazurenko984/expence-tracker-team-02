@@ -10,7 +10,11 @@
   align-items: center;
 }
 
-.authNav {
+.navigation {
+  display: none;
+}
+
+.userBarBtn {
   display: none;
 }
 
@@ -26,12 +30,17 @@
   fill: none;
   width: 36px;
   height: 36px;
-  transition: stroke 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    stroke 0.2s ease;
 }
 
-.burgerBtn:focus .burgerIcon,
-.burgerBtn:active .burgerIcon {
+.burgerBtn:focus .burgerIcon {
   stroke: var(--green-neon);
+}
+
+.burgerBtn:active .burgerIcon {
+  transform: scale(0.97);
 }
 
 .header.isPublic {
@@ -53,10 +62,25 @@
   .burgerBtn:hover .burgerIcon {
     stroke: var(--green-neon);
   }
+
+  .header.isPublic .headerContent {
+    padding-top: 32px;
+  }
 }
 
 @media screen and (min-width: 1440px) {
-  .authNav {
+  .navigation {
     display: block;
+  }
+
+  .userBarBtn {
+    display: block;
+  }
+  .burgerBtn {
+    display: none;
+  }
+
+  .header.isPublic .headerContent {
+    padding-top: 32px;
   }
 }

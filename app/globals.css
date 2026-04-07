@@ -1,29 +1,27 @@
 :root {
   --bg-color: #0c0d0d;
-  --btn-grey: #262626;
-  --green-neon: #00d27f;
-  --green-hover: #00b36b;
-  --purple-brand: #7f56d9;
+  --btn-grey: #29292b;
+  --green-neon: #0ef387;
+  --green-hover: #0ebb69;
 
-  --decoration-grey: rgba(38, 38, 38, 0.5);
-  --decoration-green: rgba(0, 210, 127, 0.15);
-  --decoration-green-dark: #00d27f;
-  --decoration-black: #111111;
+  --decorationr-grey: rgba(17, 16, 28, 0.5);
+  --decoration-green: rgba(2, 177, 90, 0.15);
+  --decoration-green-dark: #02b15a;
+  --decoration-black: #11101c;
 
-  --white: #ffffff;
-  --white-dim-05: rgba(255, 255, 255, 0.5);
-  --white-dim-04: rgba(255, 255, 255, 0.4);
-  --white-dim-02: rgba(255, 255, 255, 0.2);
-  --white-dim-01: rgba(255, 255, 255, 0.1);
-  --text-secondary: rgba(255, 255, 255, 0.5);
+  --white: #fafafa;
+  --white-dim-05: rgba(250, 250, 250, 0.5);
+  --white-dim-04: rgba(250, 250, 250, 0.4);
+  --white-dim-02: rgba(250, 250, 250, 0.2);
+  --white-dim-01: rgba(250, 250, 250, 0.1);
 
   --component-bg-color: #171719;
   --overlay-color: rgba(12, 13, 13, 0.5);
   --error-red: #e74a3b;
 
   --font-main:
-    var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -110,13 +108,6 @@ button {
   border: none;
   background: none;
   padding: 0;
-  transition:
-    opacity 0.2s ease,
-    transform 0.1s ease;
-}
-
-button:active {
-  transform: scale(0.98);
 }
 
 .btn-primary {
@@ -153,7 +144,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   appearance: textfield;
 }
 
@@ -207,7 +198,7 @@ input[type="number"] {
 }
 
 .react-datepicker__current-month::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -14px;
   left: 14px;

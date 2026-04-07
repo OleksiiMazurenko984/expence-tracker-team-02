@@ -1,6 +1,8 @@
 'use client';
 
 import Logo from '../Logo/Logo';
+import TransactionsHistoryNav from '../TransactionsHistoryNav/TransactionsHistoryNav';
+import UserBarBtn from '../UserBarBtn/UserBarBtn';
 import css from './Header.module.css';
 
 export default function Header() {
@@ -15,9 +17,12 @@ export default function Header() {
 
           {isAuthenticated && (
             <>
-              <div className={css.authNav}>
-                <nav>{/* <TransactionsHistoryNav /> */}</nav>
-                {/* <UserBarBtn /> */}
+              <nav className={css.navigation}>
+                <TransactionsHistoryNav />
+              </nav>
+
+              <div className={css.userBarBtn}>
+                <UserBarBtn />
               </div>
 
               <button

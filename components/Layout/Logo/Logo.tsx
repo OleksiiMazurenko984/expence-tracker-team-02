@@ -1,7 +1,7 @@
-import Link from "next/link";
-import css from "./Logo.module.css";
+import Link from 'next/link';
+import css from './Logo.module.css';
 
-export default function Logo() {
+function Logo() {
   return (
     <Link href="/" className={css.logo} aria-label="Home">
       <svg className={css.icon} width="27" height="16">
@@ -11,3 +11,5 @@ export default function Logo() {
     </Link>
   );
 }
+
+export default Logo;

@@ -1,0 +1,46 @@
+.list {
+  display: flex;
+  align-items: center;
+  padding: 24px 0;
+  gap: 16px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.02em;
+  border-radius: 30px;
+  border: 1px solid var(--white-dim-04);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.expenseLink {
+  padding: 12px 21px;
+}
+
+.incomeLink {
+  padding: 12px 23px;
+}
+
+.link:hover {
+  border-color: var(--green-neon);
+}
+
+.link:focus,
+.link:active {
+  background-color: var(--green-neon);
+  border-color: var(--green-neon);
+  color: var(--bg-color);
+}
+
+.link:active {
+  transform: scale(0.97);
+}
+
+.active:hover {
+  color: var(--bg-color);
+}

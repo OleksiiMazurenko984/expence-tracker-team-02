@@ -22,7 +22,8 @@
   color: var(--bg-color);
   transition: background-color 0.2s ease;
 }
-.green:hover {
+.green:hover,
+.green:focus {
   background-color: var(--green-hover);
 }
 
@@ -32,7 +33,8 @@
   color: var(--white);
   transition: border-color 0.2s ease;
 }
-.outline:hover {
+.outline:hover,
+.outline:focus {
   border-color: var(--green-neon);
 }
 
@@ -41,7 +43,8 @@
   color: var(--white);
   transition: color 0.2s ease;
 }
-.gray:hover {
+.gray:hover,
+.gray:focus {
   color: var(--white-dim-05);
 }
 
