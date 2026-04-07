@@ -35,7 +35,7 @@ export default function TransactionsSearchTools({
           type="text"
           value={search}
           onChange={handleSearchChange}
-          placeholder="Search comment"
+          placeholder="Search for anything.."
           className={styles.input}
         />
       </label>
@@ -50,6 +50,7 @@ export default function TransactionsSearchTools({
           value={date}
           onChange={handleDateChange}
           className={styles.input}
+          placeholder="dd/mm/yyyy"
         />
       </label>
     </div>
