@@ -13,13 +13,13 @@ export async function registerUser(
 ): Promise<RegisterResponse> {
   try {
     const response = await api.post<RegisterResponse>('/auth/register', data);
-    toast.success('Регистрация прошла успешно!');
+    toast.success('Registration was successful!');
     return response.data;
   } catch (error: AxiosError) {
     const message =
       error.response?.status === 409
-        ? 'Пользователь с таким email уже существует'
-        : (error.response?.data as any)?.message || 'Ошибка регистрации';
+        ? 'A user with this email address already exists'
+        : (error.response?.data as any)?.message || 'Registration error';
 
     toast.error(message);
     throw error;
@@ -29,13 +29,13 @@ export async function registerUser(
 export async function loginUser(data: LoginRequest): Promise<LoginResponse> {
   try {
     const response = await api.post<LoginResponse>('/auth/login', data);
-    toast.success('Вход выполнен успешно!');
+    toast.success('Login successful!');
     return response.data;
   } catch (error: AxiosError) {
     const message =
       error.response?.status === 403
-        ? 'Неверный email или пароль'
-        : (error.response?.data as any)?.message || 'Ошибка входа';
+        ? 'Incorrect email or password'
+        : (error.response?.data as any)?.message || 'Login error';
 
     toast.error(message);
     throw error;
