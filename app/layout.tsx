@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "modern-normalize/modern-normalize.css";
-import "./globals.css";
-import { ModalProvider } from "@/providers/modal-provider";
-import Providers from "@/components/Layout/Providers";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import 'modern-normalize/modern-normalize.css';
+import './globals.css';
+import Header from '@/components/Layout/Header/Header';
+import { ModalProvider } from '@/providers/modal-provider';
+import Providers from '@/components/Layout/Providers';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} ${inter.variable}`}>
         <Providers>
+          <Header />
           <ModalProvider />
           {children}
         </Providers>

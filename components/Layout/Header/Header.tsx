@@ -1,9 +1,45 @@
+'use client';
+
+import Logo from '../Logo/Logo';
+import TransactionsHistoryNav from '../TransactionsHistoryNav/TransactionsHistoryNav';
+import UserBarBtn from '../UserBarBtn/UserBarBtn';
+import css from './Header.module.css';
+
 export default function Header() {
+  const isAuthenticated = true; // Тимчасово
+  const headerClasses = `${css.header} ${!isAuthenticated ? css.isPublic : ''}`;
+
   return (
-    <header style={{ padding: '20px 0', borderBottom: '1px solid var(--border-color)' }}>
+    <header className={headerClasses}>
       <div className="container">
-        <h2 style={{ margin: 0, color: 'var(--green-neon)' }}>ExpenseTracker</h2>
-        {/* Placeholder for actual navigation / user profile */}
+        <div className={css.headerContent}>
+          <Logo />
+
+          {isAuthenticated && (
+            <>
+              <nav
+                className={css.navigation}
+                aria-label="Main transaction navigation"
+              >
+                <TransactionsHistoryNav />
+              </nav>
+
+              <div className={css.userBarBtn}>
+                <UserBarBtn />
+              </div>
+
+              <button
+                className={css.burgerBtn}
+                type="button"
+                aria-label="Open menu"
+              >
+                <svg className={css.burgerIcon}>
+                  <use href="/icons.svg#icon-burger-menu" />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
       </div>
     </header>
   );
