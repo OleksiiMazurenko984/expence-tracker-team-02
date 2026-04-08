@@ -6,30 +6,51 @@
 
 .searchLabel,
 .dateLabel {
-  position: relative;
   display: block;
 }
 
-.searchIcon,
-.calendarIcon {
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.inputWithIcon :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.inputIcon {
   position: absolute;
-  left: 14px;
+  right: 30px;
+  left: auto;
   top: 50%;
-  transform: translateY(-50%);
-  stroke: rgba(250, 250, 250, 0.5);
-  fill: none;
+  transform: translate(0, -50%);
+  height: 20px;
+  color: #0ef387;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
+  z-index: 2;
 }
 
 .input {
   width: 100%;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid rgba(250, 250, 250, 0.2);
-  background: rgba(23, 23, 25, 0.8);
+  height: 50px;
+  border-radius: 30px;
+  background: #0c0d0d;
   color: #fafafa;
-  padding: 0 14px 0 42px;
-  font-size: 14px;
+  padding: 0 60px 0 20px;
+  font-size: 16px;
+}
+
+.searchInput {
+  border: none;
+}
+
+.dateInput {
+  border: 1px solid rgba(250, 250, 250, 0.2);
 }
 
 .input:focus {

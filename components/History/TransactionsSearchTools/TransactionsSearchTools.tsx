@@ -1,6 +1,9 @@
 'use client';
 
 import { ChangeEvent } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { CalendarIcon, SearchIcon } from '@/components/UI/Icons/Icons';
 import styles from './TransactionsSearchTools.module.css';
 
 interface TransactionsSearchToolsProps {
@@ -20,38 +23,54 @@ export default function TransactionsSearchTools({
     onSearchChange(e.target.value);
   };
 
-  const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onDateChange(e.target.value);
+  const selectedDate = date ? new Date(`${date}T00:00:00`) : null;
+
+  const handlePickerChange = (value: Date | null) => {
+    if (!value) {
+      onDateChange('');
+      return;
+    }
+
+    const localDate = new Date(
+      value.getTime() - value.getTimezoneOffset() * 60000
+    )
+      .toISOString()
+      .slice(0, 10);
+    onDateChange(localDate);
   };
 
   return (
     <div className={styles.wrapper}>
       <label className={styles.searchLabel}>
         <span className={styles.srOnly}>Search by comment</span>
-        <svg className={styles.searchIcon} width="18" height="18">
-          <use href="/icons.svg#icon-search" />
-        </svg>
-        <input
-          type="text"
-          value={search}
-          onChange={handleSearchChange}
-          placeholder="Search for anything.."
-          className={styles.input}
-        />
+        <div className={styles.inputWithIcon}>
+          <input
+            type="text"
+            value={search}
+            onChange={handleSearchChange}
+            placeholder="Search for anything.."
+            className={`${styles.input} ${styles.searchInput}`}
+          />
+          <span className={styles.inputIcon}>
+            <SearchIcon />
+          </span>
+        </div>
       </label>
 
       <label className={styles.dateLabel}>
         <span className={styles.srOnly}>Filter by date</span>
-        <svg className={styles.calendarIcon} width="18" height="18">
-          <use href="/icons.svg#icon-calendar" />
-        </svg>
-        <input
-          type="date"
-          value={date}
-          onChange={handleDateChange}
-          className={styles.input}
-          placeholder="dd/mm/yyyy"
-        />
+        <div className={styles.inputWithIcon}>
+          <DatePicker
+            selected={selectedDate}
+            onChange={handlePickerChange}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="dd/mm/yyyy"
+            className={`${styles.input} ${styles.dateInput}`}
+          />
+          <span className={styles.inputIcon}>
+            <CalendarIcon />
+          </span>
+        </div>
       </label>
     </div>
   );

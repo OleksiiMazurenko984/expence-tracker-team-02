@@ -17,6 +17,7 @@
 }
 
 .label input,
+.input,
 .label select,
 .label textarea {
   height: 40px;
@@ -25,6 +26,35 @@
   background: rgba(255, 255, 255, 0.03);
   color: #fafafa;
   padding: 0 12px;
+}
+
+.input {
+  width: 100%;
+  padding-right: 44px;
+}
+
+.inputWithIcon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputWithIcon :global(.react-datepicker-wrapper) {
+  width: 100%;
+}
+
+.inputIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #0ef387;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 }
 
 .label textarea {

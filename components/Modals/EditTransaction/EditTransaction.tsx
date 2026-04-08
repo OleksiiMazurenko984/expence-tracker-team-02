@@ -2,10 +2,13 @@
 
 import { FormEvent, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import Modal from '@/components/Modals/Modal/Modal';
 import { useUpdateTransaction } from '@/lib/hooks/useUpdateTransaction';
 import { useCategories } from '@/lib/hooks/useCategories';
 import type { TransactionItem } from '@/types/transaction';
+import { CalendarIcon, ClockIcon } from '@/components/UI/Icons/Icons';
 import type { TransactionType } from '@/types/sharedTypes';
 import styles from './EditTransaction.module.css';
 
@@ -15,6 +18,33 @@ interface EditTransactionProps {
   type: TransactionType;
 }
 
+const parseDate = (value: string | undefined) =>
+  value ? new Date(`${value}T00:00:00`) : null;
+
+const parseTime = (value: string | undefined) => {
+  if (!value) {
+    return null;
+  }
+
+  const [hours = '00', minutes = '00'] = value.split(':');
+  const time = new Date();
+  time.setHours(Number(hours), Number(minutes), 0, 0);
+  return time;
+};
+
+const toLocalIsoDate = (value: Date) => {
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, '0');
+  const day = String(value.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const formatTime = (value: Date) => {
+  const hours = String(value.getHours()).padStart(2, '0');
+  const minutes = String(value.getMinutes()).padStart(2, '0');
+  return `${hours}:${minutes}`;
+};
+
 export default function EditTransaction({
   onClose,
   transaction,
@@ -23,8 +53,8 @@ export default function EditTransaction({
   const updateMutation = useUpdateTransaction();
   const { data: categories } = useCategories();
 
-  const [date, setDate] = useState(transaction?.date ?? '');
-  const [time, setTime] = useState(transaction?.time ?? '');
+  const [date, setDate] = useState<Date | null>(parseDate(transaction?.date));
+  const [time, setTime] = useState<Date | null>(parseTime(transaction?.time));
   const [sum, setSum] = useState(String(transaction?.sum ?? ''));
   const [comment, setComment] = useState(transaction?.comment ?? '');
   const [category, setCategory] = useState(transaction?.category?._id ?? '');
@@ -42,8 +72,8 @@ export default function EditTransaction({
         type,
         id: transaction._id,
         data: {
-          date,
-          time,
+          date: date ? toLocalIsoDate(date) : transaction.date,
+          time: time ? formatTime(time) : transaction.time,
           sum: Number(sum),
           comment,
           category,
@@ -73,22 +103,40 @@ export default function EditTransaction({
 
         <label className={styles.label}>
           Date
-          <input
-            type="date"
-            value={date}
-            onChange={e => setDate(e.target.value)}
-            required
-          />
+          <div className={styles.inputWithIcon}>
+            <DatePicker
+              selected={date}
+              onChange={(value: Date | null) => setDate(value)}
+              dateFormat="dd/MM/yyyy"
+              placeholderText="dd/mm/yyyy"
+              className={styles.input}
+              required
+            />
+            <span className={styles.inputIcon}>
+              <CalendarIcon />
+            </span>
+          </div>
         </label>
-
         <label className={styles.label}>
           Time
-          <input
-            type="time"
-            value={time}
-            onChange={e => setTime(e.target.value)}
-            required
-          />
+          <div className={styles.inputWithIcon}>
+            <DatePicker
+              selected={time}
+              onChange={(value: Date | null) => setTime(value)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeIntervals={5}
+              timeCaption="Time"
+              timeFormat="HH:mm"
+              dateFormat="HH:mm"
+              placeholderText="00:00"
+              className={styles.input}
+              required
+            />
+            <span className={styles.inputIcon}>
+              <ClockIcon />
+            </span>
+          </div>
         </label>
 
         <label className={styles.label}>
