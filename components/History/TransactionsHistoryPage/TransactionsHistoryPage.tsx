@@ -71,22 +71,18 @@ export default function TransactionsHistoryPage({
       </section>
 
       <section className={css.historySection}>
-        <div className={css.toolsSection}>
-          <TransactionsSearchTools
-            search={search}
-            date={date}
-            onSearchChange={setSearch}
-            onDateChange={setDate}
-          />
-        </div>
+        <TransactionsSearchTools
+          search={search}
+          date={date}
+          onSearchChange={setSearch}
+          onDateChange={setDate}
+        />
 
-        <div className={css.listSection}>
-          <TransactionsList
-            type={type}
-            transactions={data}
-            isLoading={isLoading}
-          />
-        </div>
+        <TransactionsList
+          type={type}
+          transactions={data}
+          isLoading={isLoading}
+        />
       </section>
     </div>
   );

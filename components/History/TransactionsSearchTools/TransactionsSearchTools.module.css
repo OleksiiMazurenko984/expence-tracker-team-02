@@ -73,7 +73,7 @@
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767.98px) {
   .wrapper {
     flex-direction: row;
     align-items: center;

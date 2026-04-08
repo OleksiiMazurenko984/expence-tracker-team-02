@@ -35,11 +35,6 @@
   gap: 16px;
 }
 
-.listSection {
-  min-height: 0;
-  flex: 1;
-}
-
 .headerSection {
   margin-bottom: 36px;
 }
@@ -48,7 +43,7 @@
   margin-bottom: 40px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767.98px) {
   .pageContainer {
     gap: 24px;
   }
@@ -68,14 +63,9 @@
     width: 704px;
     padding: 32px;
   }
-
-  .listSection {
-    overflow: hidden;
-    display: flex;
-  }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1439.98px) {
   .pageContainer {
     display: flex;
     flex-direction: row;
