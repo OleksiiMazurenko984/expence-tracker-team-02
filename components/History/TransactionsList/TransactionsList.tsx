@@ -3,10 +3,12 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDeleteTransaction } from '@/lib/hooks/useDeleteTransaction';
+import { useMedia } from '@/lib/hooks/useMedia';
+import { useUserStore } from '@/lib/store/userStore';
 import type { TransactionItem } from '@/types/transaction';
 import type { TransactionType } from '@/types/sharedTypes';
 import EditTransaction from '@/components/Modals/EditTransaction/EditTransaction';
-import styles from './TransactionsList.module.css';
+import css from './TransactionsList.module.css';
 
 interface TransactionsListProps {
   type: TransactionType;
@@ -20,8 +22,36 @@ export default function TransactionsList({
   isLoading,
 }: TransactionsListProps) {
   const deleteMutation = useDeleteTransaction();
+  const user = useUserStore(state => state.user);
+  const isPhoneLayout = useMedia('(min-width: 375px) and (max-width: 767px)');
   const [editedTransaction, setEditedTransaction] =
     useState<TransactionItem | null>(null);
+  const currency = user?.currency ? user.currency.toUpperCase() : 'UAH';
+
+  const truncateForPhone = (value: string, maxLength = 7) => {
+    if (!isPhoneLayout || value.length <= maxLength) {
+      return value;
+    }
+
+    return `${value.slice(0, maxLength)}...`;
+  };
+
+  const formatDateForViewport = (value: string) => {
+    const parsedDate = new Date(`${value}T00:00:00`);
+
+    if (Number.isNaN(parsedDate.getTime())) {
+      return value;
+    }
+
+    const weekDayShort = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][
+      parsedDate.getDay()
+    ];
+    const day = parsedDate.getDate();
+    const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+    const year = parsedDate.getFullYear();
+
+    return `${weekDayShort}, ${day}.${month}.${year}`;
+  };
 
   const onDelete = async (id: string) => {
     try {
@@ -42,18 +72,17 @@ export default function TransactionsList({
   };
 
   if (isLoading) {
-    return <p className={styles.state}>Loading transactions...</p>;
+    return <p className={css.state}>Loading transactions...</p>;
   }
 
   if (!transactions.length) {
-    return <p className={styles.state}>No transactions found.</p>;
+    return <p className={css.state}>No transactions found.</p>;
   }
-
   return (
     <>
-      <div className={styles.tableWrap}>
-        <div className={styles.table}>
-          <div className={styles.headRow}>
+      <div className={css.tableWrap}>
+        <div className={css.table}>
+          <div className={css.headRow}>
             <span>Category</span>
             <span>Comment</span>
             <span>Date</span>
@@ -62,51 +91,49 @@ export default function TransactionsList({
             <span>Actions</span>
           </div>
 
-          <ul className={styles.list}>
+          <ul className={css.list}>
             {transactions.map(transaction => (
-              <li key={transaction._id} className={styles.row}>
+              <li key={transaction._id} className={css.row}>
                 <span>{transaction.category.categoryName}</span>
-                <span>{transaction.comment || '—'}</span>
-                <span>{transaction.date}</span>
+                <span>{truncateForPhone(transaction.comment || '—')}</span>
+                <span>{formatDateForViewport(transaction.date)}</span>
                 <span>{transaction.time}</span>
-                <span
-                  className={
-                    type === 'incomes' ? styles.income : styles.expense
-                  }
-                >
-                  {transaction.sum}
+                <span className={css.sumValue}>
+                  {transaction.sum} / {currency}
                 </span>
-                <div className={styles.actions}>
+                <div className={css.actions}>
                   <button
                     type="button"
-                    className={`${styles.iconButton} ${styles.editButton}`}
+                    className={`${css.iconButton} ${css.editButton}`}
                     onClick={() => setEditedTransaction(transaction)}
                     aria-label="Edit transaction"
                   >
                     <svg
                       aria-hidden
-                      width={20}
-                      height={20}
-                      className={styles.editIcon}
+                      width={16}
+                      height={16}
+                      className={css.editIcon}
                     >
                       <use href="/icons.svg#icon-edit" />
                     </svg>
+                    <span className={css.desktopButtonText}>Edit</span>
                   </button>
                   <button
                     type="button"
-                    className={`${styles.iconButton} ${styles.deleteButton}`}
+                    className={`${css.iconButton} ${css.deleteButton}`}
                     onClick={() => onDelete(transaction._id)}
                     aria-label="Delete transaction"
                     disabled={deleteMutation.isPending}
                   >
                     <svg
                       aria-hidden
-                      width={20}
-                      height={20}
-                      className={styles.deleteIcon}
+                      width={16}
+                      height={16}
+                      className={css.deleteIcon}
                     >
                       <use href="/icons.svg#icon-trash" />
                     </svg>
+                    <span className={css.desktopButtonText}>Delete</span>
                   </button>
                 </div>
               </li>

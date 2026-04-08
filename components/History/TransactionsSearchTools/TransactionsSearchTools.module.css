@@ -1,6 +1,6 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -73,9 +73,18 @@
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 767.98px) {
   .wrapper {
-    grid-template-columns: 1fr 240px;
+    flex-direction: row;
     align-items: center;
+    gap: 13px;
+  }
+
+  .searchLabel {
+    max-width: 261px;
+  }
+
+  .dateLabel {
+    max-width: 187px;
   }
 }

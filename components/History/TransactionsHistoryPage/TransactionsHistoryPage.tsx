@@ -7,7 +7,7 @@ import TransactionsSearchTools from '@/components/History/TransactionsSearchTool
 import TransactionsList from '@/components/History/TransactionsList/TransactionsList';
 import { useTransactions } from '@/lib/hooks/useTransactions';
 import type { TransactionType } from '@/types/sharedTypes';
-import styles from './TransactionsHistoryPage.module.css';
+import css from './TransactionsHistoryPage.module.css';
 
 interface TransactionsHistoryPageProps {
   type: TransactionType;
@@ -60,33 +60,29 @@ export default function TransactionsHistoryPage({
       ? 'Track and celebrate every bit of earnings effortlessly! Gain insights into your total revenue in a snap.'
       : 'View and manage every transaction seamlessly! Your entire financial landscape, all in one place.';
   return (
-    <div className={styles.pageContainer}>
-      <section className={styles.headerSection}>
-        <h1 className={styles.title}>{title}</h1>
-        <p className={styles.description}>{descr}</p>
+    <div className={css.pageContainer}>
+      <section className={css.headerSection}>
+        <h1 className={css.title}>{title}</h1>
+        <p className={css.description}>{descr}</p>
       </section>
 
-      <section className={styles.totalSection}>
+      <section className={css.totalSection}>
         <TransactionsTotalAmount />
       </section>
 
-      <section className={styles.historySection}>
-        <div className={styles.toolsSection}>
-          <TransactionsSearchTools
-            search={search}
-            date={date}
-            onSearchChange={setSearch}
-            onDateChange={setDate}
-          />
-        </div>
+      <section className={css.historySection}>
+        <TransactionsSearchTools
+          search={search}
+          date={date}
+          onSearchChange={setSearch}
+          onDateChange={setDate}
+        />
 
-        <div className={styles.listSection}>
-          <TransactionsList
-            type={type}
-            transactions={data}
-            isLoading={isLoading}
-          />
-        </div>
+        <TransactionsList
+          type={type}
+          transactions={data}
+          isLoading={isLoading}
+        />
       </section>
     </div>
   );
