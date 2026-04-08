@@ -78,8 +78,6 @@ export default function TransactionsList({
   if (!transactions.length) {
     return <p className={css.state}>No transactions found.</p>;
   }
-  css;
-
   return (
     <>
       <div className={css.tableWrap}>
@@ -118,6 +116,7 @@ export default function TransactionsList({
                     >
                       <use href="/icons.svg#icon-edit" />
                     </svg>
+                    <span className={css.desktopButtonText}>Edit</span>
                   </button>
                   <button
                     type="button"
@@ -134,6 +133,7 @@ export default function TransactionsList({
                     >
                       <use href="/icons.svg#icon-trash" />
                     </svg>
+                    <span className={css.desktopButtonText}>Delete</span>
                   </button>
                 </div>
               </li>
