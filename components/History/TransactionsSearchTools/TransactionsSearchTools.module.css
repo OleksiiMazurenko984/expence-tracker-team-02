@@ -1,6 +1,6 @@
 .wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
 }
 
@@ -75,7 +75,8 @@
 
 @media (min-width: 768px) {
   .wrapper {
-    grid-template-columns: 1fr 240px;
+    flex-direction: row;
     align-items: center;
+    gap: 13px;
   }
 }

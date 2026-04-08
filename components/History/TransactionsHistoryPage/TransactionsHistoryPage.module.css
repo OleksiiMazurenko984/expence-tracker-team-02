@@ -1,12 +1,11 @@
 .pageContainer {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 19px;
   color: #fafafa;
 }
 
 .title {
-  margin: 0;
   font-weight: 400;
   font-size: 32px;
   line-height: 1.2;
@@ -15,7 +14,7 @@
 }
 
 .description {
-  margin: 20px 0 0;
+  margin-top: 20px;
   font-weight: 400;
   font-size: 14px;
   line-height: 1.2;
@@ -25,7 +24,6 @@
 }
 
 .historySection {
-  width: 100%;
   width: 335px;
   height: 516px;
   margin: 0 auto;
@@ -52,7 +50,7 @@
 
 @media (min-width: 768px) {
   .pageContainer {
-    gap: 20px;
+    gap: 24px;
   }
 
   .title {
@@ -61,13 +59,14 @@
   }
 
   .description {
-    margin-top: 14px;
+    margin-top: 13px;
+    font-size: 16px;
+    max-width: 532px;
   }
 
   .historySection {
-    max-width: 100%;
-    min-height: 640px;
-    padding: 0 0 16px;
+    width: 704px;
+    padding: 32px;
   }
 
   .listSection {

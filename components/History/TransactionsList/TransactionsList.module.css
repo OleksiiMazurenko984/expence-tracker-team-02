@@ -43,7 +43,7 @@
   padding: 12px 20px;
   width: 100%;
   box-sizing: border-box;
-  background: rgba(255, 255, 255, 0.03);
+  background: #171719;
 }
 
 .actions {
@@ -74,11 +74,15 @@
 .editIcon {
   stroke: #0c0d0d;
   fill: transparent;
+  width: 16px;
+  height: 16px;
 }
 
 .deleteIcon {
   stroke: #fafafa;
   fill: transparent;
+  width: 16px;
+  height: 16px;
 }
 
 .income {
