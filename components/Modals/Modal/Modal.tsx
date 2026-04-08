@@ -56,7 +56,7 @@ const Modal = ({
             aria-label="Close"
           >
             <svg className={styles.xIcon} width="20" height="20">
-              <use href="icons.svg#icon-x"></use>
+              <use href="/icons.svg#icon-x"></use>
             </svg>
           </button>
         </div>
