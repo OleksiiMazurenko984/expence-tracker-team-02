@@ -6,7 +6,6 @@ import { useDeleteTransaction } from '@/lib/hooks/useDeleteTransaction';
 import type { TransactionItem } from '@/types/transaction';
 import type { TransactionType } from '@/types/sharedTypes';
 import EditTransaction from '@/components/Modals/EditTransaction/EditTransaction';
-import { DeleteIcon, EditIcon } from '@/components/UI/Icons/Icons';
 import styles from './TransactionsList.module.css';
 
 interface TransactionsListProps {
@@ -80,20 +79,34 @@ export default function TransactionsList({
                 <div className={styles.actions}>
                   <button
                     type="button"
-                    className={styles.iconButton}
+                    className={`${styles.iconButton} ${styles.editButton}`}
                     onClick={() => setEditedTransaction(transaction)}
                     aria-label="Edit transaction"
                   >
-                    <EditIcon />
+                    <svg
+                      aria-hidden
+                      width={20}
+                      height={20}
+                      className={styles.editIcon}
+                    >
+                      <use href="/icons.svg#icon-edit" />
+                    </svg>
                   </button>
                   <button
                     type="button"
-                    className={styles.iconButton}
+                    className={`${styles.iconButton} ${styles.deleteButton}`}
                     onClick={() => onDelete(transaction._id)}
                     aria-label="Delete transaction"
                     disabled={deleteMutation.isPending}
                   >
-                    <DeleteIcon />
+                    <svg
+                      aria-hidden
+                      width={20}
+                      height={20}
+                      className={styles.deleteIcon}
+                    >
+                      <use href="/icons.svg#icon-trash" />
+                    </svg>
                   </button>
                 </div>
               </li>

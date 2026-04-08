@@ -3,7 +3,6 @@
 import { ChangeEvent } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarIcon, SearchIcon } from '@/components/UI/Icons/Icons';
 import styles from './TransactionsSearchTools.module.css';
 
 interface TransactionsSearchToolsProps {
@@ -52,7 +51,9 @@ export default function TransactionsSearchTools({
             className={`${styles.input} ${styles.searchInput}`}
           />
           <span className={styles.inputIcon}>
-            <SearchIcon />
+            <svg aria-hidden width={20} height={20} className={styles.toolIcon}>
+              <use href="/icons.svg#icon-search" />
+            </svg>
           </span>
         </div>
       </label>
@@ -68,7 +69,9 @@ export default function TransactionsSearchTools({
             className={`${styles.input} ${styles.dateInput}`}
           />
           <span className={styles.inputIcon}>
-            <CalendarIcon />
+            <svg aria-hidden width={20} height={20} className={styles.toolIcon}>
+              <use href="/icons.svg#icon-calendar" />
+            </svg>
           </span>
         </div>
       </label>
