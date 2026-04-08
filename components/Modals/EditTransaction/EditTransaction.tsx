@@ -11,7 +11,7 @@ import { useUserStore } from '@/lib/store/userStore';
 import type { TransactionItem } from '@/types/transaction';
 import { CalendarIcon, ClockIcon } from '@/components/UI/Icons/Icons';
 import type { TransactionType } from '@/types/sharedTypes';
-import styles from './EditTransaction.module.css';
+import css from './EditTransaction.module.css';
 
 interface EditTransactionProps {
   onClose: () => void;
@@ -101,27 +101,27 @@ export default function EditTransaction({
 
   return (
     <Modal isOpen onClose={onClose}>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.row}>
-          <label className={styles.fieldGroup}>
-            <span className={styles.label}>Date</span>
-            <div className={styles.inputWithIcon}>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <div className={css.row}>
+          <label className={css.fieldGroup}>
+            <span className={css.label}>Date</span>
+            <div className={css.inputWithIcon}>
               <DatePicker
                 selected={date}
                 onChange={(value: Date | null) => setDate(value)}
                 dateFormat="dd/MM/yyyy"
                 placeholderText="dd/mm/yyyy"
-                className={styles.input}
+                className={css.input}
                 required
               />
-              <span className={styles.inputIcon}>
+              <span className={css.inputIcon}>
                 <CalendarIcon />
               </span>
             </div>
           </label>
-          <label className={styles.fieldGroup}>
-            <span className={styles.label}>Time</span>
-            <div className={styles.inputWithIcon}>
+          <label className={css.fieldGroup}>
+            <span className={css.label}>Time</span>
+            <div className={css.inputWithIcon}>
               <DatePicker
                 selected={time}
                 onChange={(value: Date | null) => setTime(value)}
@@ -132,20 +132,20 @@ export default function EditTransaction({
                 timeFormat="HH:mm"
                 dateFormat="HH:mm"
                 placeholderText="00:00"
-                className={styles.input}
+                className={css.input}
                 required
               />
-              <span className={styles.inputIcon}>
+              <span className={css.inputIcon}>
                 <ClockIcon />
               </span>
             </div>
           </label>
         </div>
 
-        <label className={styles.fieldGroup}>
-          <span className={styles.label}>Category</span>
+        <label className={css.fieldGroup}>
+          <span className={css.label}>Category</span>
           <select
-            className={styles.input}
+            className={css.input}
             value={category}
             onChange={e => setCategory(e.target.value)}
             required
@@ -161,11 +161,11 @@ export default function EditTransaction({
           </select>
         </label>
 
-        <label className={styles.fieldGroup}>
-          <span className={styles.label}>Sum</span>
-          <div className={styles.inputWithIcon}>
+        <label className={css.fieldGroup}>
+          <span className={css.label}>Sum</span>
+          <div className={css.inputWithIcon}>
             <input
-              className={styles.input}
+              className={css.input}
               type="number"
               min="0"
               step="0.01"
@@ -173,14 +173,14 @@ export default function EditTransaction({
               onChange={e => setSum(e.target.value)}
               required
             />
-            <span className={styles.inputIcon}>{currency}</span>
+            <span className={css.inputIcon}>{currency}</span>
           </div>
         </label>
 
-        <label className={styles.fieldGroup}>
-          <span className={styles.label}>Comment</span>
+        <label className={css.fieldGroup}>
+          <span className={css.label}>Comment</span>
           <textarea
-            className={styles.textarea}
+            className={css.textarea}
             value={comment}
             onChange={e => setComment(e.target.value)}
             maxLength={250}
@@ -189,7 +189,7 @@ export default function EditTransaction({
 
         <button
           type="submit"
-          className={styles.submitBtn}
+          className={css.submitBtn}
           disabled={updateMutation.isPending}
         >
           {updateMutation.isPending ? 'Saving...' : 'Send'}

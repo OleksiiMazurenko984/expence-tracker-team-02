@@ -139,6 +139,12 @@
 @media (min-width: 768px) {
   .tableWrap {
     height: 100%;
+    overflow-x: hidden;
+  }
+
+  .table {
+    width: 100%;
+    min-width: 0;
   }
 
   .headRow {
@@ -148,6 +154,32 @@
   .row {
     font-size: 20px;
   }
+
+  .headRow > span:nth-child(1),
+  .row > span:nth-child(1) {
+    width: 95px;
+  }
+
+  .headRow > span:nth-child(2),
+  .row > span:nth-child(2) {
+    width: 95px;
+  }
+
+  .headRow > span:nth-child(3),
+  .row > span:nth-child(3) {
+    width: 95px;
+  }
+
+  .headRow > span:nth-child(4),
+  .row > span:nth-child(4) {
+    width: 80px;
+  }
+
+  .headRow > span:nth-child(5),
+  .row > span:nth-child(5) {
+    width: 95px;
+  }
+
   .iconButton {
     width: 44px;
     height: 44px;

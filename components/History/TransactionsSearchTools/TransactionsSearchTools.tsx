@@ -3,7 +3,7 @@
 import { ChangeEvent } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import styles from './TransactionsSearchTools.module.css';
+import css from './TransactionsSearchTools.module.css';
 
 interface TransactionsSearchToolsProps {
   search: string;
@@ -39,37 +39,37 @@ export default function TransactionsSearchTools({
   };
 
   return (
-    <div className={styles.wrapper}>
-      <label className={styles.searchLabel}>
-        <span className={styles.srOnly}>Search by comment</span>
-        <div className={styles.inputWithIcon}>
+    <div className={css.wrapper}>
+      <label className={css.searchLabel}>
+        <span className={css.srOnly}>Search by comment</span>
+        <div className={css.inputWithIcon}>
           <input
             type="text"
             value={search}
             onChange={handleSearchChange}
             placeholder="Search for anything.."
-            className={`${styles.input} ${styles.searchInput}`}
+            className={`${css.input} ${css.searchInput}`}
           />
-          <span className={styles.inputIcon}>
-            <svg aria-hidden width={20} height={20} className={styles.toolIcon}>
+          <span className={css.inputIcon}>
+            <svg aria-hidden width={20} height={20} className={css.toolIcon}>
               <use href="/icons.svg#icon-search" />
             </svg>
           </span>
         </div>
       </label>
 
-      <label className={styles.dateLabel}>
-        <span className={styles.srOnly}>Filter by date</span>
-        <div className={styles.inputWithIcon}>
+      <label className={css.dateLabel}>
+        <span className={css.srOnly}>Filter by date</span>
+        <div className={css.inputWithIcon}>
           <DatePicker
             selected={selectedDate}
             onChange={handlePickerChange}
             dateFormat="dd/MM/yyyy"
             placeholderText="dd/mm/yyyy"
-            className={`${styles.input} ${styles.dateInput}`}
+            className={`${css.input} ${css.dateInput}`}
           />
-          <span className={styles.inputIcon}>
-            <svg aria-hidden width={20} height={20} className={styles.toolIcon}>
+          <span className={css.inputIcon}>
+            <svg aria-hidden width={20} height={20} className={css.toolIcon}>
               <use href="/icons.svg#icon-calendar" />
             </svg>
           </span>
