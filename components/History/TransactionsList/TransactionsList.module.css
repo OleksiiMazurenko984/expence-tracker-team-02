@@ -13,7 +13,8 @@
 .row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 0;
+  justify-content: flex-start;
 }
 
 .headRow {
@@ -38,8 +39,8 @@
 }
 
 .row {
-  min-height: 56px;
   border-radius: 12px;
+  font-size: 14px;
   padding: 12px 20px;
   width: 100%;
   box-sizing: border-box;
@@ -49,6 +50,39 @@
 .actions {
   display: flex;
   gap: 8px;
+  flex: 0 0 auto;
+}
+
+.headRow > span,
+.row > span {
+  min-width: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.headRow > span:nth-child(1),
+.row > span:nth-child(1) {
+  width: 70px;
+}
+
+.headRow > span:nth-child(2),
+.row > span:nth-child(2) {
+  width: 70px;
+}
+
+.headRow > span:nth-child(3),
+.row > span:nth-child(3) {
+  width: 60px;
+}
+
+.headRow > span:nth-child(4),
+.row > span:nth-child(4) {
+  width: 45px;
+}
+
+.headRow > span:nth-child(5),
+.row > span:nth-child(5) {
+  width: 50px;
 }
 
 .iconButton {
@@ -68,6 +102,10 @@
 
 .deleteButton {
   background-color: #0c0d0d;
+}
+
+.desktopButtonText {
+  display: none;
 }
 
 .editIcon {
@@ -92,6 +130,10 @@
   color: rgba(250, 250, 250, 0.6);
 }
 
+.sumValue {
+  color: #fafafa;
+}
+
 @media (min-width: 768px) {
   .tableWrap {
     height: 100%;
@@ -108,5 +150,57 @@
     width: 44px;
     height: 44px;
     padding: 14px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .iconButton {
+    width: auto;
+    min-width: 119px;
+    height: 47px;
+    padding: 14px 32px;
+    gap: 10px;
+  }
+
+  .desktopButtonText {
+    display: inline;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: inherit;
+  }
+
+  .editButton {
+    color: #0c0d0d;
+  }
+
+  .deleteButton {
+    color: #fafafa;
+  }
+
+  .headRow > span:nth-child(1),
+  .row > span:nth-child(1) {
+    width: 180px;
+  }
+
+  .headRow > span:nth-child(2),
+  .row > span:nth-child(2) {
+    width: 200px;
+  }
+
+  .headRow > span:nth-child(3),
+  .row > span:nth-child(3) {
+    width: 180px;
+  }
+
+  .headRow > span:nth-child(4),
+  .row > span:nth-child(4) {
+    width: 110px;
+  }
+
+  .headRow > span:nth-child(5),
+  .row > span:nth-child(5) {
+    width: 180px;
   }
 }

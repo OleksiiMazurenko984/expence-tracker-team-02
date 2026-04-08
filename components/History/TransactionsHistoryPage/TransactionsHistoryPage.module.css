@@ -74,3 +74,27 @@
     display: flex;
   }
 }
+
+@media (min-width: 1440px) {
+  .pageContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 94px;
+    row-gap: 40px;
+  }
+
+  .headerSection {
+    margin-bottom: 0;
+  }
+
+  .totalSection {
+    margin-bottom: 0;
+  }
+
+  .historySection {
+    width: 1240px;
+    padding: 20px 40px;
+    margin: 0;
+  }
+}

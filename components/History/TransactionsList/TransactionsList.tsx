@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDeleteTransaction } from '@/lib/hooks/useDeleteTransaction';
+import { useMedia } from '@/lib/hooks/useMedia';
+import { useUserStore } from '@/lib/store/userStore';
 import type { TransactionItem } from '@/types/transaction';
 import type { TransactionType } from '@/types/sharedTypes';
 import EditTransaction from '@/components/Modals/EditTransaction/EditTransaction';
@@ -20,8 +22,19 @@ export default function TransactionsList({
   isLoading,
 }: TransactionsListProps) {
   const deleteMutation = useDeleteTransaction();
+  const user = useUserStore(state => state.user);
+  const isPhoneLayout = useMedia('(min-width: 375px) and (max-width: 767px)');
   const [editedTransaction, setEditedTransaction] =
     useState<TransactionItem | null>(null);
+  const currency = user?.currency ? user.currency.toUpperCase() : 'UAH';
+
+  const truncateForPhone = (value: string, maxLength = 7) => {
+    if (!isPhoneLayout || value.length <= maxLength) {
+      return value;
+    }
+
+    return `${value.slice(0, maxLength)}...`;
+  };
 
   const onDelete = async (id: string) => {
     try {
@@ -66,15 +79,11 @@ export default function TransactionsList({
             {transactions.map(transaction => (
               <li key={transaction._id} className={styles.row}>
                 <span>{transaction.category.categoryName}</span>
-                <span>{transaction.comment || '—'}</span>
+                <span>{truncateForPhone(transaction.comment || '—')}</span>
                 <span>{transaction.date}</span>
                 <span>{transaction.time}</span>
-                <span
-                  className={
-                    type === 'incomes' ? styles.income : styles.expense
-                  }
-                >
-                  {transaction.sum}
+                <span className={styles.sumValue}>
+                  {transaction.sum} / {currency}
                 </span>
                 <div className={styles.actions}>
                   <button
