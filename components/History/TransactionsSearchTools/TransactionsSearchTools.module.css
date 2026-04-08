@@ -79,4 +79,12 @@
     align-items: center;
     gap: 13px;
   }
+
+  .searchLabel {
+    max-width: 261px;
+  }
+
+  .dateLabel {
+    max-width: 187px;
+  }
 }

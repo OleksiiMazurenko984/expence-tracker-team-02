@@ -85,8 +85,8 @@ export default function TransactionsList({
                   >
                     <svg
                       aria-hidden
-                      width={20}
-                      height={20}
+                      width={16}
+                      height={16}
                       className={styles.editIcon}
                     >
                       <use href="/icons.svg#icon-edit" />
@@ -101,8 +101,8 @@ export default function TransactionsList({
                   >
                     <svg
                       aria-hidden
-                      width={20}
-                      height={20}
+                      width={16}
+                      height={16}
                       className={styles.deleteIcon}
                     >
                       <use href="/icons.svg#icon-trash" />
