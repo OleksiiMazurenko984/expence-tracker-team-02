@@ -91,9 +91,14 @@
   cursor: pointer;
 }
 
-submitBtn:disabled {
+.submitBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.error {
+  color: #ff5f5f;
+  font-size: 12px;
 }
 
 @media (min-width: 768px) {

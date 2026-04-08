@@ -1,6 +1,8 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { useMemo } from 'react';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { toast } from 'react-hot-toast';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -56,59 +58,76 @@ export default function EditTransaction({
   const { user } = useUserStore();
   const currency = user?.currency ? user.currency.toUpperCase() : 'UAH';
 
-  const [date, setDate] = useState<Date | null>(parseDate(transaction?.date));
-  const [time, setTime] = useState<Date | null>(parseTime(transaction?.time));
-  const [sum, setSum] = useState(String(transaction?.sum ?? ''));
-  const [comment, setComment] = useState(transaction?.comment ?? '');
-  const [category, setCategory] = useState(transaction?.category?._id ?? '');
+  const categoryOptions = useMemo(
+    () =>
+      type === 'incomes'
+        ? (categories?.incomes ?? [])
+        : (categories?.expenses ?? []),
+    [categories, type]
+  );
 
-  const categoryOptions =
-    type === 'incomes'
-      ? (categories?.incomes ?? [])
-      : (categories?.expenses ?? []);
+  const formik = useFormik({
+    initialValues: {
+      date: parseDate(transaction?.date),
+      time: parseTime(transaction?.time),
+      sum: String(transaction?.sum ?? ''),
+      comment: transaction?.comment ?? '',
+      category: transaction?.category?._id ?? '',
+    },
+    validationSchema: Yup.object({
+      date: Yup.date().nullable().required('Required'),
+      time: Yup.date().nullable().required('Required'),
+      category: Yup.string().required('Please select a category'),
+      sum: Yup.number()
+        .typeError('Required')
+        .positive('Must be positive')
+        .required('Required'),
+      comment: Yup.string().max(250, 'Too long'),
+    }),
+    onSubmit: async values => {
+      try {
+        await updateMutation.mutateAsync({
+          type,
+          id: transaction._id,
+          data: {
+            date: values.date ? toLocalIsoDate(values.date) : transaction.date,
+            time: values.time ? formatTime(values.time) : transaction.time,
+            sum: Number(values.sum),
+            comment: values.comment,
+            category: values.category,
+          },
+        });
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    try {
-      await updateMutation.mutateAsync({
-        type,
-        id: transaction._id,
-        data: {
-          date: date ? toLocalIsoDate(date) : transaction.date,
-          time: time ? formatTime(time) : transaction.time,
-          sum: Number(sum),
-          comment,
-          category,
-        },
-      });
-
-      toast.success('Transaction updated successfully');
-      onClose();
-    } catch (error: unknown) {
-      const message =
-        typeof error === 'object' &&
-        error !== null &&
-        'response' in error &&
-        typeof (error as { response?: { data?: { message?: string } } })
-          .response?.data?.message === 'string'
-          ? ((error as { response?: { data?: { message?: string } } }).response
-              ?.data?.message ?? 'Failed to fetch transactions')
-          : 'Failed to update transaction';
-      toast.error(message);
-    }
-  };
+        toast.success('Transaction updated successfully');
+        onClose();
+      } catch (error: unknown) {
+        const message =
+          typeof error === 'object' &&
+          error !== null &&
+          'response' in error &&
+          typeof (error as { response?: { data?: { message?: string } } })
+            .response?.data?.message === 'string'
+            ? ((error as { response?: { data?: { message?: string } } })
+                .response?.data?.message ?? 'Failed to fetch transactions')
+            : 'Failed to update transaction';
+        toast.error(message);
+      }
+    },
+  });
 
   return (
     <Modal isOpen onClose={onClose}>
-      <form className={css.form} onSubmit={handleSubmit}>
+      <form className={css.form} onSubmit={formik.handleSubmit}>
         <div className={css.row}>
           <label className={css.fieldGroup}>
             <span className={css.label}>Date</span>
             <div className={css.inputWithIcon}>
               <DatePicker
-                selected={date}
-                onChange={(value: Date | null) => setDate(value)}
+                selected={formik.values.date}
+                onChange={(value: Date | null) =>
+                  formik.setFieldValue('date', value)
+                }
+                onBlur={() => formik.setFieldTouched('date', true)}
                 dateFormat="dd/MM/yyyy"
                 placeholderText="dd/mm/yyyy"
                 className={css.input}
@@ -118,13 +137,20 @@ export default function EditTransaction({
                 <CalendarIcon />
               </span>
             </div>
+            {formik.touched.date && formik.errors.date && (
+              <span className={css.error}>{formik.errors.date.toString()}</span>
+            )}
           </label>
+
           <label className={css.fieldGroup}>
             <span className={css.label}>Time</span>
             <div className={css.inputWithIcon}>
               <DatePicker
-                selected={time}
-                onChange={(value: Date | null) => setTime(value)}
+                selected={formik.values.time}
+                onChange={(value: Date | null) =>
+                  formik.setFieldValue('time', value)
+                }
+                onBlur={() => formik.setFieldTouched('time', true)}
                 showTimeSelect
                 showTimeSelectOnly
                 timeIntervals={5}
@@ -139,16 +165,20 @@ export default function EditTransaction({
                 <ClockIcon />
               </span>
             </div>
+            {formik.touched.time && formik.errors.time && (
+              <span className={css.error}>{formik.errors.time.toString()}</span>
+            )}
           </label>
         </div>
 
         <label className={css.fieldGroup}>
           <span className={css.label}>Category</span>
           <select
+            name="category"
             className={css.input}
-            value={category}
-            onChange={e => setCategory(e.target.value)}
-            required
+            value={formik.values.category}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
           >
             <option value="" disabled>
               Select category
@@ -159,6 +189,9 @@ export default function EditTransaction({
               </option>
             ))}
           </select>
+          {formik.touched.category && formik.errors.category && (
+            <span className={css.error}>{formik.errors.category}</span>
+          )}
         </label>
 
         <label className={css.fieldGroup}>
@@ -169,22 +202,31 @@ export default function EditTransaction({
               type="number"
               min="0"
               step="0.01"
-              value={sum}
-              onChange={e => setSum(e.target.value)}
-              required
+              name="sum"
+              value={formik.values.sum}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
             <span className={css.inputIcon}>{currency}</span>
           </div>
+          {formik.touched.sum && formik.errors.sum && (
+            <span className={css.error}>{formik.errors.sum}</span>
+          )}
         </label>
 
         <label className={css.fieldGroup}>
           <span className={css.label}>Comment</span>
           <textarea
             className={css.textarea}
-            value={comment}
-            onChange={e => setComment(e.target.value)}
+            name="comment"
+            value={formik.values.comment}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             maxLength={250}
           />
+          {formik.touched.comment && formik.errors.comment && (
+            <span className={css.error}>{formik.errors.comment}</span>
+          )}
         </label>
 
         <button
