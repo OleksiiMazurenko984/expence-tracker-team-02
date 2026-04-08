@@ -7,6 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Modal from '@/components/Modals/Modal/Modal';
 import { useUpdateTransaction } from '@/lib/hooks/useUpdateTransaction';
 import { useCategories } from '@/lib/hooks/useCategories';
+import { useUserStore } from '@/lib/store/userStore';
 import type { TransactionItem } from '@/types/transaction';
 import { CalendarIcon, ClockIcon } from '@/components/UI/Icons/Icons';
 import type { TransactionType } from '@/types/sharedTypes';
@@ -52,6 +53,8 @@ export default function EditTransaction({
 }: EditTransactionProps) {
   const updateMutation = useUpdateTransaction();
   const { data: categories } = useCategories();
+  const { user } = useUserStore();
+  const currency = user?.currency ? user.currency.toUpperCase() : 'UAH';
 
   const [date, setDate] = useState<Date | null>(parseDate(transaction?.date));
   const [time, setTime] = useState<Date | null>(parseTime(transaction?.time));
@@ -99,49 +102,50 @@ export default function EditTransaction({
   return (
     <Modal isOpen onClose={onClose}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h2 className={styles.title}>Edit transaction</h2>
+        <div className={styles.row}>
+          <label className={styles.fieldGroup}>
+            <span className={styles.label}>Date</span>
+            <div className={styles.inputWithIcon}>
+              <DatePicker
+                selected={date}
+                onChange={(value: Date | null) => setDate(value)}
+                dateFormat="dd/MM/yyyy"
+                placeholderText="dd/mm/yyyy"
+                className={styles.input}
+                required
+              />
+              <span className={styles.inputIcon}>
+                <CalendarIcon />
+              </span>
+            </div>
+          </label>
+          <label className={styles.fieldGroup}>
+            <span className={styles.label}>Time</span>
+            <div className={styles.inputWithIcon}>
+              <DatePicker
+                selected={time}
+                onChange={(value: Date | null) => setTime(value)}
+                showTimeSelect
+                showTimeSelectOnly
+                timeIntervals={5}
+                timeCaption="Time"
+                timeFormat="HH:mm"
+                dateFormat="HH:mm"
+                placeholderText="00:00"
+                className={styles.input}
+                required
+              />
+              <span className={styles.inputIcon}>
+                <ClockIcon />
+              </span>
+            </div>
+          </label>
+        </div>
 
-        <label className={styles.label}>
-          Date
-          <div className={styles.inputWithIcon}>
-            <DatePicker
-              selected={date}
-              onChange={(value: Date | null) => setDate(value)}
-              dateFormat="dd/MM/yyyy"
-              placeholderText="dd/mm/yyyy"
-              className={styles.input}
-              required
-            />
-            <span className={styles.inputIcon}>
-              <CalendarIcon />
-            </span>
-          </div>
-        </label>
-        <label className={styles.label}>
-          Time
-          <div className={styles.inputWithIcon}>
-            <DatePicker
-              selected={time}
-              onChange={(value: Date | null) => setTime(value)}
-              showTimeSelect
-              showTimeSelectOnly
-              timeIntervals={5}
-              timeCaption="Time"
-              timeFormat="HH:mm"
-              dateFormat="HH:mm"
-              placeholderText="00:00"
-              className={styles.input}
-              required
-            />
-            <span className={styles.inputIcon}>
-              <ClockIcon />
-            </span>
-          </div>
-        </label>
-
-        <label className={styles.label}>
-          Category
+        <label className={styles.fieldGroup}>
+          <span className={styles.label}>Category</span>
           <select
+            className={styles.input}
             value={category}
             onChange={e => setCategory(e.target.value)}
             required
@@ -157,21 +161,26 @@ export default function EditTransaction({
           </select>
         </label>
 
-        <label className={styles.label}>
-          Sum
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            value={sum}
-            onChange={e => setSum(e.target.value)}
-            required
-          />
+        <label className={styles.fieldGroup}>
+          <span className={styles.label}>Sum</span>
+          <div className={styles.inputWithIcon}>
+            <input
+              className={styles.input}
+              type="number"
+              min="0"
+              step="0.01"
+              value={sum}
+              onChange={e => setSum(e.target.value)}
+              required
+            />
+            <span className={styles.inputIcon}>{currency}</span>
+          </div>
         </label>
 
-        <label className={styles.label}>
-          Comment
+        <label className={styles.fieldGroup}>
+          <span className={styles.label}>Comment</span>
           <textarea
+            className={styles.textarea}
             value={comment}
             onChange={e => setComment(e.target.value)}
             maxLength={250}
@@ -183,7 +192,7 @@ export default function EditTransaction({
           className={styles.submitBtn}
           disabled={updateMutation.isPending}
         >
-          {updateMutation.isPending ? 'Saving...' : 'Edit'}
+          {updateMutation.isPending ? 'Saving...' : 'Send'}
         </button>
       </form>
     </Modal>
